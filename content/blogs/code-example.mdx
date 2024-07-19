@@ -1,0 +1,154 @@
+export const metadata = {
+  title: "Code Example with Syntax Highlighting",
+  publishDate: "2024-07-10",
+  description:
+    "Here is an example of how to use code blocks in MDX with syntax highlighting.",
+  category: "MDX",
+};
+
+Here an inline code: `console.log('hello')` example.
+
+Here is a code block:
+
+```javascript
+console.log("Hello, world!");
+```
+
+```typescript
+const greeting: string = "Hello, world!";
+console.log(greeting);
+```
+
+```python
+print("Hello, world!")
+```
+
+### Code Component
+
+The `Code` component is designed to display a block of code with syntax highlighting and a copy-to-clipboard functionality. Here's a breakdown of its parts:
+
+1. **Imports and Initial Setup**:
+
+   - `React`, `useRef`, and `useState` are imported from React.
+   - The `props` parameter is defined with an `any` type to allow flexibility in the types of props passed to the component.
+
+2. **State and Refs**:
+
+   - `copied`: A boolean state to track if the code has been copied to the clipboard.
+   - `codeRef`: A reference to the `<code>` HTML element, used to access the code content for copying.
+
+3. **Language Extraction**:
+
+   - The `className` is extracted from `props`.
+   - A regex is used to match and extract the language part of the class name, which is assumed to be in the format `language-<lang>`.
+
+4. **Copy Functionality**:
+
+   - `handleCopy`: A function that copies the code text to the clipboard. It accesses the text content of the `codeRef` element, writes it to the clipboard, and updates the `copied` state to provide user feedback.
+
+5. **Rendering**:
+   - The component returns a `div` containing:
+     - A header with the detected language and a copy button.
+     - A `pre` element wrapping a `code` element to display the code with proper formatting and syntax highlighting.
+   - The `whiteSpace: "pre-wrap"` style ensures that long lines of code wrap within the container.
+
+### Code Component Code
+
+```jsx
+"use client";
+import React, { useRef, useState } from "react";
+
+const Code = (props: any) => {
+  const [copied, setCopied] = useState(false);
+  const codeRef = useRef < HTMLElement > null;
+
+  // Extract the language from the className
+  const className = props.className || "";
+  const matches = className.match(/language-(?<lang>.*)/);
+  const language = matches?.groups?.lang || "";
+
+  // Handle copy functionality
+  const handleCopy = () => {
+    if (codeRef.current) {
+      const codeText = codeRef.current.innerText;
+      navigator.clipboard.writeText(codeText).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+      });
+    }
+  };
+
+  return (
+    <div className="code-block gap-0 rounded-lg text-white pb-6">
+      <div className="flex justify-between items-center bg-gray-900 py-2 px-4 rounded-t-lg">
+        <span className="text-gray-300">{language}</span>
+        <button
+          type="button"
+          className="text-gray-300 hover:text-white"
+          onClick={handleCopy}
+        >
+          {copied ? "Copied!" : "Copy"}
+        </button>
+      </div>
+      <pre className="bg-gray-800 p-4 rounded-b-lg overflow-auto">
+        <code
+          ref={codeRef}
+          className={`${className} bg-gray-800`}
+          style={{ whiteSpace: "pre-wrap" }}
+        >
+          {props.children}
+        </code>
+      </pre>
+    </div>
+  );
+};
+
+export default Code;
+```
+
+### InlineCode Component
+
+The `InlineCode` component is a simple component designed to display inline code snippets. Here's a breakdown:
+
+1. **Imports**:
+
+   - `React` is imported from React.
+
+2. **Props Interface**:
+
+   - `InlineCodeProps`: An interface defining the props for the component, which includes a `children` prop of type `React.ReactNode`.
+
+3. **Rendering**:
+   - The component returns a `code` element styled with Tailwind CSS classes to visually distinguish inline code from regular text.
+   - The `children` prop is rendered within the `code` element, allowing any content passed to the `InlineCode` component to be displayed as inline code.
+
+### InlineCode Component Code
+
+```jsx
+"use client";
+import type React from "react";
+
+interface InlineCodeProps {
+  children: React.ReactNode;
+}
+
+const InlineCode: React.FC<InlineCodeProps> = ({ children }) => {
+  return (
+    <code className="bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100 px-2 py-1 rounded text-base">
+      {children}
+    </code>
+  );
+};
+
+export default InlineCode;
+```
+
+By using these components, you can easily add code blocks and inline code snippets with syntax highlighting to your React application.
+
+## How Syntax Highlighting is Achieved
+
+To enable syntax highlighting for code blocks in our MDX content, we use two main tools:
+
+1. **rehype-highlight**: This plugin for `rehype` adds syntax highlighting to code blocks using `highlight.js`. It's configured in our MDX setup to automatically apply syntax highlighting to code blocks.
+
+2. **tailwind-highlightjs**: This TailwindCSS plugin adds styles for syntax highlighting provided by `highlight.js`. By including it in our TailwindCSS configuration, we ensure that the highlighted code blocks are styled consistently with our overall design.

@@ -35,7 +35,11 @@ const Code = (props: any) => {
         </button>
       </div>
       <pre className="bg-gray-800 p-4 rounded-b-lg overflow-auto">
-        <code ref={codeRef} className={`${className} bg-gray-800`}>
+        <code
+          ref={codeRef}
+          className={`${className} bg-gray-800`}
+          style={{ whiteSpace: "pre-wrap" }}
+        >
           {props.children}
         </code>
       </pre>

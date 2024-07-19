@@ -36,7 +36,7 @@ Here's a line break above this sentence.
 
 Here's another paragraph followed by a blockquote:
 
-> This is a blockquote. It should be styled differently from a regular paragraph.
+> This is a blockquote. It should be styled differently from a regular paragraph. So says the blockquote.
 
 ### Lists
 
@@ -64,6 +64,12 @@ const greet = (name) => {
 console.log(greet("World"));
 ```
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+## The mdx-components Module
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+Styling for MDX content is handled via the mdx-components module, which provides a set of components for styling content. This sample MDX file demonstrates the styling of various HTML elements using the mdx-components module.
+
+```typescript
+    h1: (props) => <h1 className="text-4xl font-black pb-4" {...props} />,
+    h2: (props) => <h2 className="text-3xl font-bold pb-4" {...props} />,
+    p: (props) => <p className="text-lg pb-4" {...props} />,
+```

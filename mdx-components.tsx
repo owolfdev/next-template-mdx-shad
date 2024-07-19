@@ -4,6 +4,7 @@ import YouTube from "@/components/mdx/youtube";
 import Code from "@/components/mdx/code";
 import InlineCode from "@/components/mdx/inline-code";
 import Pre from "@/components/mdx/pre"; // Adjust the import path as needed
+import { Button } from "@/components/ui/button";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -23,6 +24,17 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h4: (props) => <h4 className="text-xl font-medium pb-4" {...props} />,
     h5: (props) => <h5 className="text-lg font-normal pb-4" {...props} />,
     h6: (props) => <h6 className="text-base font-light pb-4" {...props} />,
-    p: (props) => <p className="text-lg pb-4" {...props} />,
+    p: (props) => <p className="text-lg mb-4" {...props} />,
+    li: (props) => <li className="pb-1" {...props} />,
+    ul: (props) => <ul className="list-disc pl-6 pb-4" {...props} />,
+    ol: (props) => <ol className="list-decimal pl-6 pb-4" {...props} />,
+    hr: (props) => <hr className="my-4" {...props} />,
+    blockquote: (props) => (
+      <blockquote
+        style={{ paddingBottom: 0 }}
+        className="border-l-4 pl-4 my-4"
+        {...props}
+      />
+    ),
   };
 }
