@@ -3,7 +3,6 @@ import path from "node:path";
 import React from "react";
 import dynamic from "next/dynamic";
 import type { Metadata, ResolvingMetadata } from "next";
-import Link from "next/link";
 import { format } from "date-fns";
 
 type Props = {
