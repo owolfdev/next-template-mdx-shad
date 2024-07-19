@@ -45,7 +45,7 @@ export default function Home() {
             starter template. It&apos;s a foundation for creating modern web
             applications.
           </p>
-          <Link href="https://github.com/owolfdev/nextjs-template">
+          <Link href="https://github.com/owolfdev/next-template-mdx-shad">
             Code on Github
           </Link>
         </div>

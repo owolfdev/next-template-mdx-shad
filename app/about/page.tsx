@@ -20,7 +20,7 @@ export default function About() {
           content using Markdown and embed React components within it. It
           features a blog page for posting articles, a contact page for
           communication, and dark mode for a comfortable viewing experience. The
-          template uses ShadCN components to ensure consistent design and
+          template uses shadcn/ui components to ensure consistent design and
           functionality throughout the site.
         </div>
       </div>

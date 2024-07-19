@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ModeToggle } from "@/components/theme-toggle";
+import { ModeToggle } from "@/components/nav/theme-toggle";
 import AuthComponent from "./auth-button";
 import {
   Sheet,

@@ -15,17 +15,6 @@ import { Button, buttonVariants } from "../ui/button";
 export default function AuthComponent() {
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
-
   return (
     <div className="">
       <DropdownMenu onOpenChange={(open) => setIsOpen(open)}>
