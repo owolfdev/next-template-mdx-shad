@@ -1,77 +1,70 @@
-import fs from "node:fs";
-import path from "node:path";
+// import ReactMarkdown from "react-markdown";
+// import Image from "next/image";
+import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { Metadata } from "next";
 
-type Post = {
-  slug: string;
-  metadata: PostMetadata;
-};
-
-interface PostMetadata {
-  title: string;
-  publishDate: string;
-  [key: string]: string | number | boolean; // Replace 'any' with specific types for dynamic properties
+// Define the metadata generation function
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Next Template",
+  };
 }
 
-async function getAllPosts(): Promise<Post[]> {
-  const dir = path.join(process.cwd(), "mdx");
-  const files = fs.readdirSync(dir);
+export default function Home() {
+  const markdown = `
+  
+  `;
 
-  const posts = files.map((filename) => {
-    const { metadata } = require(`../mdx/${filename}`);
-    return {
-      slug: filename.replace(".mdx", ""),
-      metadata,
-    };
-  });
-
-  // Sort posts by publishDate in descending order (latest on top)
-  posts.sort(
-    (a, b) =>
-      new Date(b.metadata.publishDate).getTime() -
-      new Date(a.metadata.publishDate).getTime()
-  );
-
-  return posts;
-}
-
-export default async function Home() {
-  const posts = await getAllPosts();
+  // const MDXContent = dynamic(() => import("@/content/page-content/home.mdx"));
 
   return (
-    <main className="flex min-h-screen flex-col items-center gap-24 p-24">
-      <div>Next MDX Configure Static Blog</div>
-      <div className="sm:w-3/4">
-        As of Next JS 14 we can configure our apps to support MDX using the
-        @next/mdx package. Find instructions{" "}
-        <Link
-          target="_blank"
-          className="font-bold"
-          href="https://nextjs.org/docs/app/building-your-application/configuring/mdx"
-        >
-          here.
-        </Link>
+    <div className="max-w-3xl z-10 w-full items-center justify-between">
+      <div className="w-full flex justify-center items-center flex-col gap-6">
+        {/* <h1 className="text-5xl sm:text-6xl font-black pb-6"> */}
+        <h1 className="text-5xl sm:text-6xl font-black pb-6">
+          Next.js Template
+        </h1>
+        {/* <div className="flex flex-col gap-4 text-[16px]">{markdown}</div> */}
+        {/* <MDXContent /> */}
+        <div className="flex flex-col gap-4 text-lg">
+          <p>
+            🚀 Next.js 14 Framework: This is a basic template starter using
+            Next.js 14. It offers efficient performance and fast page loading.
+          </p>
+          <p>
+            🌟 Shadcn UI Elements: The interface uses Shadcn UI components.
+            It&apos;s designed to be responsive and user-friendly.
+          </p>{" "}
+          <p>
+            📝 MDX Support**: Write content using Markdown and embed React
+            components within it.
+          </p>{" "}
+          <p>
+            🎉 **Getting Started**: Begin your development with this Next.js 14
+            starter template. It&apos;s a foundation for creating modern web
+            applications.
+          </p>
+          <Link href="https://github.com/owolfdev/nextjs-template">
+            Code on Github
+          </Link>
+        </div>
+        <div className="w-full text-lg">
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
+          ab illo inventore veritatis et quasi architecto beatae vitae dicta
+          sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+          aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+          qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
+          dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
+          quia non numquam eius modi tempora incidunt ut labore et dolore magnam
+          aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
+          exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex
+          ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in
+          ea voluptate velit esse quam nihil molestiae consequatur, vel illum
+          qui dolorem eum fugiat quo voluptas nulla pariatur?
+        </div>
       </div>
-      <div className="w-full">
-        <h2 className="text-4xl font-bold mb-8">MDX Posts</h2>
-        <ul className="space-y-4">
-          {posts.map((post) => (
-            <li key={post.slug} className="p-4 border rounded-md shadow">
-              <Link
-                className="text-2xl font-bold hover:underline"
-                href={`/mdx/${post.slug}`}
-              >
-                {post.metadata.title}
-              </Link>
-              <p className="text-gray-500">
-                Published on:{" "}
-                {new Date(post.metadata.publishDate).toLocaleDateString()}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </main>
+    </div>
   );
 }
