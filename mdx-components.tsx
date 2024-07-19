@@ -36,5 +36,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
+    a: (props) => <a className="hover:underline font-semibold" {...props} />,
   };
 }

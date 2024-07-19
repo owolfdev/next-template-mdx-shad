@@ -33,19 +33,26 @@ async function getAllPosts(): Promise<Post[]> {
         const { metadata } = require(`@/content/blogs/${filename}`);
         return {
           slug: filename.replace(".mdx", ""),
-          metadata: metadata || { title: "Untitled", index: 0 },
+          metadata: metadata || {
+            title: "Untitled",
+            publishDate: "1970-01-01",
+          },
         };
       } catch (error) {
         console.error(`Error loading metadata for file ${filename}:`, error);
         return {
           slug: filename.replace(".mdx", ""),
-          metadata: { title: "Untitled", index: 0 },
+          metadata: { title: "Untitled", publishDate: "1970-01-01" },
         };
       }
     });
 
-  // Sort posts by index in ascending order
-  posts.sort((a, b) => (a.metadata.index || 0) - (b.metadata.index || 0));
+  // Sort posts by publishDate in descending order
+  posts.sort(
+    (a, b) =>
+      new Date(b.metadata.publishDate).getTime() -
+      new Date(a.metadata.publishDate).getTime()
+  );
 
   return posts;
 }
