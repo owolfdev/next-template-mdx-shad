@@ -15,6 +15,9 @@ export default function Blog() {
     <div className="max-w-3xl z-10 w-full items-center justify-between">
       <div className="w-full flex justify-center items-center flex-col gap-6">
         <h1 className="text-5xl sm:text-6xl font-black">Contact</h1>
+        <p>
+          This is a sample page. The contact form is currently non-functional.
+        </p>
         <div className="w-full">
           <ContactForm />
         </div>
